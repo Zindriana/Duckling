@@ -24,10 +24,8 @@ public class LoginServlet extends HttpServlet {
         resp.setContentType("text/html");
         userDatabase.createUsers();
         receiptDatabase.createReceiptsTable();
-        List<User> users = userDatabase.getAllUsers();
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        PrintWriter out = resp.getWriter();
 
         String sql = "SELECT username, password FROM users WHERE username=? AND password=?";
 

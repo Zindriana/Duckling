@@ -20,7 +20,6 @@ import java.util.Date;
 public class ReceiptServlet extends HttpServlet {
 
     UserDatabase userDatabase = new UserDatabase();
-    //ReceiptDatabase receiptDatabase = new ReceiptDatabase();
     Connection conn = userDatabase.getConnection();
     SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -119,7 +118,6 @@ public class ReceiptServlet extends HttpServlet {
             req.setAttribute("category", receipt.getCategory());
             req.setAttribute("price", receipt.getPrice());
             req.setAttribute("owner", username);
-            //req.setAttribute("receipt", receipt);
             req.getRequestDispatcher("/editReceipt.jsp").forward(req, resp);
         }
     }

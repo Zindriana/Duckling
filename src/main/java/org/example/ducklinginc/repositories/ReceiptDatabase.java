@@ -107,7 +107,6 @@ public class ReceiptDatabase {
     public void editReceipt(int id, String title, String date, String description, String category, int price, String username){
         String sql = "UPDATE receipts SET title = ?, date = ?, description = ?, category = ?, price = ? WHERE id = ? AND owner = ?";
 
-
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, title);

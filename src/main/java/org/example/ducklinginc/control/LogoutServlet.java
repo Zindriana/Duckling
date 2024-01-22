@@ -14,12 +14,9 @@ import java.io.PrintWriter;
     @WebServlet("/LogoutServlet")
     public class LogoutServlet extends HttpServlet {
 
-        ReceiptDatabase receiptDatabase = new ReceiptDatabase();
-
         public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
             HttpSession session = req.getSession();
             session.setAttribute("name", null);
-            //resp.setContentType("text/html");
             resp.sendRedirect("/login.jsp");
         }
     }
