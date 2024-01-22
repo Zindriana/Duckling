@@ -10,6 +10,7 @@ import org.example.ducklinginc.repositories.ReceiptDatabase;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet("/MenuServlet")
 public class MenuServlet extends HttpServlet {
@@ -18,20 +19,27 @@ public class MenuServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
+        resp.setContentType("text/html");
         HttpSession session = req.getSession();
         String username = (String) session.getAttribute("name");
-        receiptDatabase.getAllReceipts(username);
-        resp.setContentType("text/html");
+        List<Receipt> receiptlist = receiptDatabase.getAllReceipts(username);
+        for(Receipt receipt: receiptlist){
+            out.println("<br>" + receipt.getId() + ") Titel: " + receipt.getTitle() + " Date: " + receipt.getDate() + " Description: " + receipt.getDescription() + " Category: " + receipt.getCategory() + " Cost: " + receipt.getPrice()+"SEK <br>");
+        }
 
-        out.println("<form action=\"//addReceipt.jsp\" method=\"post\">");
+        out.println(" <br> <form action=\"/addReceipt.jsp\" method=\"post\">");
         out.println("<input type=\"submit\" value=\"New Receipt\">");
         out.println("</form>");
 
-        out.println("<form action=\"//editReceipt.jsp\" method=\"post\">");
+        out.println("<br> <form action=\"/ReceiptServlet/editReceipt\" method=\"post\">");
+        out.println("<label>Choose the number for the receipt you want to edit</label> <br>");
+        out.println("<input type=\"number\" name=\"id\" value=\"1\" min=\"1\">");
         out.println("<input type=\"submit\" value=\"Edit Receipt\">");
         out.println("</form>");
 
-        out.println("<form action=\"//deleteReceipt.jsp\" method=\"post\">");
+        out.println("<form action=\"/ReceiptServlet/deleteReceipt\" method=\"post\">");
+        out.println("<label>Choose the number for the receipt you want to delete</label> <br>");
+        out.println("<input type=\"number\" name=\"id\" value=\"1\" min=\"1\">");
         out.println("<input type=\"submit\" value=\"Delete Receipt\">");
         out.println("</form>");
 

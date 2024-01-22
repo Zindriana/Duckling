@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session;
         resp.setContentType("text/html");
         userDatabase.createUsers();
-        receiptDatabase.createReceipts();
+        receiptDatabase.createReceiptsTable();
         List<User> users = userDatabase.getAllUsers();
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -50,6 +50,5 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 }
