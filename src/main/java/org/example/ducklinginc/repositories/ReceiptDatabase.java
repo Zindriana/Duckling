@@ -1,8 +1,6 @@
 package org.example.ducklinginc.repositories;
 
-import jakarta.servlet.http.HttpSession;
 import org.example.ducklinginc.model.Receipt;
-import org.example.ducklinginc.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,5 +102,25 @@ public class ReceiptDatabase {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+    }
+
+    public void editReceipt(int id, String title, String date, String description, String category, int price, String username){
+        String sql = "UPDATE receipts SET title = ?, date = ?, description = ?, category = ?, price = ? WHERE id = ? AND owner = ?";
+
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, title);
+            pstmt.setString(2, date);
+            pstmt.setString(3, description);
+            pstmt.setString(4, category);
+            pstmt.setInt(5, price);
+            pstmt.setInt(6, id);
+            pstmt.setString(7, username);
+
+            pstmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

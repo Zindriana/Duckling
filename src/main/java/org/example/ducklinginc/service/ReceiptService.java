@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ReceiptService {
 
@@ -52,6 +50,22 @@ public class ReceiptService {
 
             while(rs.next()){
                 receiptDatabase.deleteReceipt(id);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void edit(int id, String title, String date, String description, String category, int price, String username){
+        String sql = "SELECT id, owner FROM receipts WHERE id=? AND owner=?";
+
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.setString(2, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            while(rs.next()){
+                receiptDatabase.editReceipt(id, title, date, description, category, price, username);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

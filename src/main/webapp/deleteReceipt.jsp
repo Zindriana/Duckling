@@ -26,7 +26,7 @@
     </button>
 </form>
 
-<form action="${pageContext.request.contextPath}/MenuServlet" method="POST">
+<form action="${pageContext.request.contextPath}/MenuServlet" method="GET">
     <button type="submit">
         Cancel
     </button>

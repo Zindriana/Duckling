@@ -11,13 +11,14 @@
     <title>Title</title>
 </head>
     <body>
-        <form action="${pageContext.request.contextPath}/ReceiptServlet/editReceipt" method="POST">
+        <form action="${pageContext.request.contextPath}/ReceiptServlet/editConfirmed" method="POST">
+            <input type="hidden" name="id" value=${id}>
             <span>Title</span>
-            <input type="text" name="title" value=""${title}"">
+            <input type="text" name="title" value=${title}>
             <span>Date</span>
-            <input type="date" name="date" value=""${date}"">
+            <input type="date" name="date" value=${date}>
             <span>Description</span>
-            <textarea type="text" name="description">${description}""</textarea>
+            <textarea type="text" name="description">${description}</textarea>
             <span>Category</span>
             <select name="category">
                 <option ${category == 'travel' ? 'selected' : ''} value="travel">Travel</option>
@@ -26,9 +27,11 @@
                 <option ${category == 'misc' ? 'selected' : ''} value="misc">Miscellaneous</option>
             </select>
             <span>Price</span>
-            <input type="number" name="price" value=""${price}"">
+            <input type="number" name="price" value=${price}>
+            <input type="hidden" name="owner" value="${username}">
+            <br>
             <button>
-                Submit changes
+                Confirm changes
             </button>
         </form>
     </body>
